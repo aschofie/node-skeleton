@@ -1,0 +1,20 @@
+services:
+  form-service:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    command: node --env-file=config.env src/app.ts
+    networks:
+      - app-network
+
+  dummy-s3-location.com:
+    build: .
+    command: node dummy.js
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
