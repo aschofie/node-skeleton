@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "noEmit": true, // Node runs the .ts files, so we don't need to generate .js files
+    "erasableSyntaxOnly": true, // Ensures you don't use Enums/Namespaces by accident
+    "strict": true
+  }
+}
