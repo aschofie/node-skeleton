@@ -13,25 +13,33 @@ const server = http.createServer((req, res) => {
       try {
         data = JSON.parse(body);
       } catch (e) {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
+        const responseHeaders = { 'Content-Type': 'application/json' };
+        if (req.headers['x-correlation-id']) {
+          responseHeaders['X-Correlation-Id'] = req.headers['x-correlation-id'];
+        }
+        res.writeHead(400, responseHeaders);
         res.end(JSON.stringify({ error: 'Invalid JSON' }));
         return;
       }
 
       const lastName = data.lastName || '';
+      const responseHeaders = { 'Content-Type': 'application/json' };
+      if (req.headers['x-correlation-id']) {
+        responseHeaders['X-Correlation-Id'] = req.headers['x-correlation-id'];
+      }
 
       if (lastName.includes('Z')) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, responseHeaders);
         res.end(JSON.stringify({ error: 'Internal Server Error' }));
       } else if (lastName.includes('z')) {
         setTimeout(() => {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.writeHead(200, responseHeaders);
           res.end(JSON.stringify({ status: 'success' }));
         }, 3000);
       } else {
         const delay = Math.floor(Math.random() * (500 - 150 + 1)) + 150;
         setTimeout(() => {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.writeHead(200, responseHeaders);
           res.end(JSON.stringify({ status: 'success' }));
         }, delay);
       }
