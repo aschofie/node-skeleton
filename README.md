@@ -2,8 +2,8 @@
 
 ## Architecture
 
-The solution being demonstrated is a that of a simple forwarding service that
-relies features of modern node while avoiding older APIs and comprehensive
+This repository demonstrates a simple forwarding service in typescript that
+relies on features of modern node while avoiding older APIs and comprehensive
 frameworks.  The recommended version of node is 24+.  Some of the modern 
 features include:
 
